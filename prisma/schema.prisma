@@ -1,0 +1,38 @@
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+generator client {
+  provider = "prisma-client-js"
+}
+ 
+model Jornalist {
+  id  Int @id @default(autoincrement())
+  fornavn String
+  etternavn String
+  mail String @unique
+  passord String @unique
+ 
+  postId Int
+  post Postadr @relation(fields: [postId], references: [id])
+ 
+  artikkeler Artikkel[]
+}
+ 
+model Postadr {
+  id  Int @id @default(autoincrement())
+  Postnr Int
+  Poststed String
+ 
+  journalist Jornalist[]
+}
+ 
+model Artikkel {
+  id  Int @id @default(autoincrement())
+  tittle String
+  innehold String
+  createdAt DateTime @default(now())
+  updateAt  DateTime @updatedAt
+
+  journalister Jornalist[]
+}
