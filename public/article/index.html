@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <main>
+        <script defer>
+            async function fetchArtikkel(id) {
+                const res = await fetch('/api/artikkel/' + id)
+                const artikkel =  await res.json()
+    
+                document.getElementById('title').innerText = artikkel.title
+                document.getElementById('content').innerText = artikkel.content
+            }
+    
+            fetchArtikkel(1)
+        </script>
+        
+        <h1>Artikkel</h1>
+        <h2 id="title"></h2>
+        <p id="content"></p>
+    </main>
+    <aside>
+        <form action="/createArticle" method="post">
+            <input type="text" name="title" placeholder="title">
+            <input type="text" name="content" placeholder="content">
+            <input type="number" name="views" placeholder="views">
+            <input type="date" name="updateAt">
+            <input type="text" name="journalister" placeholder="fornavn på forfatter">
+            <button type="submit">Lag artikkel</button>
+        </form>
+    </aside>
+</body>
+</html>

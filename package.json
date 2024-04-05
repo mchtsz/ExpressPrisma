@@ -3,7 +3,7 @@
     "start": "tsx watch app.ts"
   },
   "dependencies": {
-    "@prisma/client": "^5.12.0",
+    "@prisma/client": "^5.12.1",
     "express": "^4.19.2",
     "prisma": "^5.12.0"
   },

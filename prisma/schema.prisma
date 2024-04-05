@@ -1,20 +1,24 @@
 datasource db {
   provider = "sqlite"
   url      = "file:./dev.db"
+
+  
 }
 generator client {
   provider = "prisma-client-js"
+
+  previewFeatures = ["fullTextSearch"]
 }
  
-model Jornalist {
+model Journalist {
   id  Int @id @default(autoincrement())
   fornavn String
   etternavn String
   mail String @unique
   passord String @unique
  
-  postId Int
-  post Postadr @relation(fields: [postId], references: [id])
+  postID Int
+  post Postadr @relation(fields: [postID], references: [id])
  
   artikkeler Artikkel[]
 }
@@ -24,15 +28,16 @@ model Postadr {
   Postnr Int
   Poststed String
  
-  journalist Jornalist[]
+  journalist Journalist[]
 }
  
 model Artikkel {
   id  Int @id @default(autoincrement())
-  tittle String
-  innehold String
+  title String
+  content String
+  views Int
   createdAt DateTime @default(now())
   updateAt  DateTime @updatedAt
 
-  journalister Jornalist[]
+  journalister Journalist[]
 }
